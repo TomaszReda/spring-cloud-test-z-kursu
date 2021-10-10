@@ -14,6 +14,6 @@ public class LimitsController {
 
     @GetMapping("/limits")
     public Limits retreveLimits(){
-        return new Limits(22,properties.getMaximum());
+        return new Limits(properties.getMinimum(),properties.getMaximum());
     }
 }
