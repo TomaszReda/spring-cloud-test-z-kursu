@@ -11,7 +11,6 @@ import pl.tomek.test.currencyexchangeservice.model.ExchangeValue;
 import pl.tomek.test.currencyexchangeservice.repository.ExchangeValueRepository;
 
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @Data
@@ -29,7 +28,7 @@ public class CurrencyExchangeController {
         ExchangeValue exchangeValue =
                repository.findByFromAndTo(from, to).orElseThrow(() -> new RuntimeException("Unable to find data from" + from + " to" + to));
 
-        exchangeValue.setPort(
+        exchangeValue.setEnvironment(
                 Integer.parseInt(Objects.requireNonNull(environment.getProperty("local.server.port"))));
 
         log.info("{}", exchangeValue);
