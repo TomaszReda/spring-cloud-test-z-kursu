@@ -24,6 +24,7 @@ public class CurrencyExchangeController {
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
     public ExchangeValue retrieveExchangeValue
             (@PathVariable String from, @PathVariable String to) throws Exception {
+        log.info("retrieveExchangeValue called with {} to {}", from, to);
 
         ExchangeValue exchangeValue =
                repository.findByFromAndTo(from, to).orElseThrow(() -> new RuntimeException("Unable to find data from" + from + " to" + to));

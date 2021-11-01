@@ -59,6 +59,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/currency-exchange-service/pom.xml">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/currency-exchange-service/src/main/java/pl/tomek/test/currencyexchangeservice/controller/CircuitBreakerController.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/currency-exchange-service/src/main/java/pl/tomek/test/currencyexchangeservice/model/ExchangeValue.java">
           <value>
             <Attribute>
@@ -70,6 +84,13 @@
           <value>
             <Attribute>
               <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/docker/docker-compose.yml">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
