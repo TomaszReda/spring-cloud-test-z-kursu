@@ -1,10 +1,44 @@
-version: '2.4'
+version: '3.7'
 services:
-  zipkin:
+
+  currency-exchange:
+    image: 22071996/mmv2-currency-exchange-service:0.0.1-SNAPSHOT
+    container_name: currency-exchange-service
+    depends_on:
+      - naming-server
+      - config-server
+    ports:
+      - 8000:8000
+    networks:
+      - currency-network
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.CONFIG.IMPORT: configserver:http://config-server:8888
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
+  zipkin-server:
     image: openzipkin/zipkin
     container_name: zipkin
-    #    environment:
-    #      - STORAGE_TYPE=mem
-    #      - MYSQL_HOST=mysql
     ports:
       - 9411:9411
+    networks:
+      - currency-network
+
+  config-server:
+    image: 22071996/mmv2-config-server:0.0.1-SNAPSHOT
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - currency-network
+
+  naming-server:
+    image: 22071996/mmv2-naming-server:0.0.1-SNAPSHOT
+    container_name: naming-server
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+
+networks:
+  currency-network:
