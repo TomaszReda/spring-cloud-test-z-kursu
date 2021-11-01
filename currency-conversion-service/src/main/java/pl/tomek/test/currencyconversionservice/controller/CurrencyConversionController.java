@@ -45,8 +45,8 @@ public class CurrencyConversionController {
     }
 
 
-    @GetMapping("/currency-conversion-foreign/from/{from}/to/{to}/quantity/{quantity}")
-    public CurrencyConversion calculateCurrencyConversionForeign(
+    @GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversion calculateCurrencyConversionfeign(
             @PathVariable String from,
             @PathVariable String to,
             @PathVariable BigDecimal quantity
@@ -56,7 +56,7 @@ public class CurrencyConversionController {
 
         CurrencyConversion currencyConversion = currencyExchangeProxy.retrieveExchangeValue(from,to);
         BigDecimal conversionMultiple = currencyConversion.getConversionMultiple();
-        String environment = currencyConversion.getEnvironment()+" foreign";
+        String environment = currencyConversion.getEnvironment()+" feign";
         Long id = currencyConversion.getId();
         CurrencyConversion result = new CurrencyConversion(id, from, to, conversionMultiple, quantity, quantity.multiply(conversionMultiple), environment);
 

@@ -3,6 +3,20 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/api-gateway/pom.xml">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/api-gateway/src/main/java/pl/test/tomek/cloud/apigateway/config/ApiGatewayConfiguration.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/config-server/HELP.md">
           <value>
             <Attribute>
@@ -17,7 +31,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/currency-conversion-service/pom.xml">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/currency-conversion-service/src/main/java/pl/tomek/test/currencyconversionservice/controller/CurrencyCOnversionCOntroller.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/currency-conversion-service/src/main/java/pl/tomek/test/currencyconversionservice/controller/CurrencyConversionController.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />
