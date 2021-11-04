@@ -1,11 +1,14 @@
 version: '3.7'
 services:
-
   currency-exchange:
-    image: 22071996/mmv2-currency-exchange-service:0.0.1-SNAPSHOT
+    image: 22071996/mmv2-currency-exchange-service:${VERSION}
     container_name: currency-exchange-service
+    restart: always
     depends_on:
       - naming-server
+      - config-server
+      - rabbitmq
+    links:
       - config-server
     ports:
       - 8000:8000
@@ -15,17 +18,53 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.CONFIG.IMPORT: configserver:http://config-server:8888
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
 
-  zipkin-server:
-    image: openzipkin/zipkin
-    container_name: zipkin
+  currency-conversion:
+    image: 22071996/mmv2-currency-conversion-service:${VERSION}
+    container_name: currency-conversion-service
+    restart: always
+    depends_on:
+      - naming-server
+      - config-server
+      - rabbitmq
+    links:
+      - config-server
+      - currency-exchange
     ports:
-      - 9411:9411
+      - 8100:8100
     networks:
       - currency-network
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.CONFIG.IMPORT: configserver:http://config-server:8888
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  api-gateway:
+    image: 22071996/mmv2-api-gateway:${VERSION}
+    container_name: mmv2-api-gateway
+    restart: always
+    depends_on:
+      - naming-server
+      - rabbitmq
+    ports:
+      - 8765:8765
+    networks:
+      - currency-network
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
 
   config-server:
-    image: 22071996/mmv2-config-server:0.0.1-SNAPSHOT
+    image: 22071996/mmv2-config-server:${VERSION}
     container_name: config-server
     ports:
       - "8888:8888"
@@ -33,10 +72,31 @@ services:
       - currency-network
 
   naming-server:
-    image: 22071996/mmv2-naming-server:0.0.1-SNAPSHOT
+    image: 22071996/mmv2-naming-server:${VERSION}
     container_name: naming-server
     ports:
       - "8761:8761"
+    networks:
+      - currency-network
+
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    container_name: zipkin
+    restart: always
+    ports:
+      - 9411:9411
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      - rabbitmq
+    networks:
+      - currency-network
+
+  rabbitmq:
+    image: rabbitmq:3.8.12-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - currency-network
 
