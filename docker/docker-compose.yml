@@ -47,7 +47,7 @@ services:
 
   api-gateway:
     image: 22071996/mmv2-api-gateway:${VERSION}
-    container_name: mmv2-api-gateway
+    container_name: api-gateway
     restart: always
     depends_on:
       - naming-server
