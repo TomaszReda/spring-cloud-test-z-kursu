@@ -27,9 +27,9 @@ spec:
         - image: 22071996/mmv2-currency-conversion-service:0.0.12-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: mmv2-currency-conversion-service
-          env:
-            - name: CURRENCY_EXCHANGE_URI
-              value: http://currency-exchange
+          envFrom:
+            - configMapRef:
+                name: currency-conversion
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -50,3 +50,11 @@ spec:
     app: currency-conversion
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: v1
+data:
+  CURRENCY_EXCHANGE_URI: http://currency-exchange
+kind: ConfigMap
+metadata:
+  name: currency-conversion
+  namespace: default
