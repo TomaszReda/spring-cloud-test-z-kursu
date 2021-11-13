@@ -43,9 +43,9 @@ metadata:
   namespace: default
 spec:
   ports:
-    - port: 8100
+    - port: 8888
       protocol: TCP
-      targetPort: 8100
+      targetPort: 8888
   selector:
     app: config-server
   sessionAffinity: None

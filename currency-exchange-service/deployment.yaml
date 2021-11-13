@@ -28,6 +28,9 @@ spec:
         - image: 22071996/mmv2-currency-exchange-service:0.0.1-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: mmv2-currency-exchange-service
+          envFrom:
+            - configMapRef:
+                name: currency-exchange-service
           readinessProbe:
             httpGet:
               port: 8000
@@ -58,3 +61,12 @@ spec:
     app: currency-exchange-service
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: v1
+data:
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+  SPRING_CONFIG_IMPORT: configserver:http://config-server:8888
+kind: ConfigMap
+metadata:
+  name: currency-exchange-service
+  namespace: default
