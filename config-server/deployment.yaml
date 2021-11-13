@@ -4,15 +4,15 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    app: currency-exchange-service
-  name: currency-exchange-service
+    app: config-server
+  name: config-server
   namespace: default
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      app: currency-exchange-service
+      app: config-server
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,21 +22,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: currency-exchange-service
+        app: config-server
     spec:
       containers:
-        - image: 22071996/mmv2-currency-exchange-service:0.0.1-SNAPSHOT
+        - image: 22071996/mmv2-config-server:0.0.1-SNAPSHOT
           imagePullPolicy: IfNotPresent
-          name: mmv2-currency-exchange-service
-          readinessProbe:
-            httpGet:
-              port: 8100
-              path: /actuator/health/readiness
-            livenessProbe:
-              httpGet:
-                port: 8100
-                path: /actuator/health/liveness
-          restartPolicy: Always
+          name: mmv2-config-server
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -47,8 +38,8 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
   labels:
-    app: currency-exchange-service
-  name: currency-exchange-service
+    app: config-server
+  name: config-server
   namespace: default
 spec:
   ports:
@@ -56,6 +47,6 @@ spec:
       protocol: TCP
       targetPort: 8100
   selector:
-    app: currency-exchange-service
+    app: config-server
   sessionAffinity: None
   type: LoadBalancer
