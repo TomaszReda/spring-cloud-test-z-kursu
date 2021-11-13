@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/currency-conversion-service-kubernates/src/main/java/com/test/microservices/currencyconversionservice/CurrencyExchangeProxy.java">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/currency-conversion-service/pom.xml">
           <value>
             <Attribute>
@@ -56,6 +63,20 @@
           <value>
             <Attribute>
               <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/currency-exchange-service-test-kubernates/pom.xml">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/currency-exchange-service-test-kubernates/src/main/java/pl/test/currencyexchangeservicetestkubernates/CurrencyExchangeRepository.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
             </Attribute>
           </value>
         </entry>
@@ -91,6 +112,13 @@
           <value>
             <Attribute>
               <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/docker/pushimage.sh">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>

@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/currency-conversion-service/currency-conversion-service.iml" filepath="$PROJECT_DIR$/currency-conversion-service/currency-conversion-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/currency-conversion-service-test-kubernates/currency-conversion-service-kubernates.iml" filepath="$PROJECT_DIR$/currency-conversion-service-test-kubernates/currency-conversion-service-kubernates.iml" />
       <module fileurl="file://$PROJECT_DIR$/currency-exchange-service/currency-exchange-service.iml" filepath="$PROJECT_DIR$/currency-exchange-service/currency-exchange-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/currency-exchange-service-test-kubernates/currency-exchange-service-test-kubernates.iml" filepath="$PROJECT_DIR$/currency-exchange-service-test-kubernates/currency-exchange-service-test-kubernates.iml" />
       <module fileurl="file://$PROJECT_DIR$/limit-service/limit-service.iml" filepath="$PROJECT_DIR$/limit-service/limit-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/naming-server/naming-server.iml" filepath="$PROJECT_DIR$/naming-server/naming-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-test-z-kursu.iml" filepath="$PROJECT_DIR$/spring-cloud-test-z-kursu.iml" />

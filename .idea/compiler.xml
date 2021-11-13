@@ -7,11 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
         <module name="config-server" />
-        <module name="currency-exchange-service" />
         <module name="currency-conversion-service" />
+        <module name="currency-conversion-service-kubernates" />
+        <module name="api-gateway" />
+        <module name="currency-exchange-service" />
         <module name="limit-service" />
+        <module name="currency-exchange-service-test-kubernates" />
         <module name="naming-server" />
       </profile>
     </annotationProcessing>
@@ -19,7 +21,9 @@
       <module name="api-gateway" target="17" />
       <module name="config-server" target="17" />
       <module name="currency-conversion-service" target="17" />
+      <module name="currency-conversion-service-kubernates" target="17" />
       <module name="currency-exchange-service" target="11" />
+      <module name="currency-exchange-service-test-kubernates" target="17" />
       <module name="limit-service" target="17" />
       <module name="naming-server" target="17" />
       <module name="properties-cloud" target="17" />
@@ -30,7 +34,9 @@
       <module name="api-gateway" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="currency-conversion-service" options="-parameters" />
+      <module name="currency-conversion-service-kubernates" options="-parameters" />
       <module name="currency-exchange-service" options="-parameters" />
+      <module name="currency-exchange-service-test-kubernates" options="-parameters" />
       <module name="limit-service" options="-parameters" />
       <module name="naming-server" options="-parameters" />
     </option>
