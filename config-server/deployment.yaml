@@ -28,6 +28,15 @@ spec:
         - image: 22071996/mmv2-currency-exchange-service:0.0.1-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: mmv2-currency-exchange-service
+          readinessProbe:
+            httpGet:
+              port: 8100
+              path: /actuator/health/readiness
+            livenessProbe:
+              httpGet:
+                port: 8100
+                path: /actuator/health/liveness
+          restartPolicy: Always
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -43,9 +52,9 @@ metadata:
   namespace: default
 spec:
   ports:
-    - port: 8888
+    - port: 8100
       protocol: TCP
-      targetPort: 8888
+      targetPort: 8100
   selector:
     app: currency-exchange-service
   sessionAffinity: None
