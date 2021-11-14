@@ -4,15 +4,15 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    app: currency-conversion-service-service
-  name: currency-conversion-service-service
+    app: currency-conversion-service
+  name: currency-conversion-service
   namespace: default
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      app: currency-conversion-service-service
+      app: currency-conversion-service
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,12 +22,23 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: currency-conversion-service-service
+        app: currency-conversion-service
     spec:
       containers:
-        - image: 22071996/mmv2-currency-conversion-service-service:0.0.1-SNAPSHOT
+        - image: 22071996/mmv2-currency-conversion-service:0.0.1-SNAPSHOT
           imagePullPolicy: IfNotPresent
-          name: mmv2-currency-conversion-service-service
+          name: mmv2-currency-conversion-service
+          envFrom:
+            - configMapRef:
+                name: currency-conversion-service
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /actuator/health/readiness
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /actuator/health/liveness
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -38,15 +49,26 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
   labels:
-    app: currency-conversion-service-service
-  name: currency-conversion-service-service
+    app: currency-conversion-service
+  name: currency-conversion-service
   namespace: default
 spec:
   ports:
-    - port: 8888
+    - port: 8000
       protocol: TCP
-      targetPort: 8888
+      targetPort: 8000
   selector:
-    app: currency-conversion-service-service
+    app: currency-conversion-service
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: v1
+data:
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+  SPRING_CONFIG_IMPORT: configserver:http://config-server:8888
+  SPRING_ZIPKIN_ENABLED: false
+  MANAGEMENT_HEALTH_RABBIT_ENABLED: false
+kind: ConfigMap
+metadata:
+  name: currency-conversion-service
+  namespace: default
