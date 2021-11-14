@@ -4,15 +4,15 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    app: currency-conversion-service
-  name: currency-conversion-service
+    app: currency-conversion
+  name: currency-conversion
   namespace: default
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      app: currency-conversion-service
+      app: currency-conversion
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,7 +22,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: currency-conversion-service
+        app: currency-conversion
     spec:
       containers:
         - image: 22071996/mmv2-currency-conversion-service:0.0.1-SNAPSHOT
@@ -30,7 +30,7 @@ spec:
           name: mmv2-currency-conversion-service
           envFrom:
             - configMapRef:
-                name: currency-conversion-service
+                name: currency-conversion
           readinessProbe:
             httpGet:
               port: 8000
@@ -49,8 +49,8 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
   labels:
-    app: currency-conversion-service
-  name: currency-conversion-service
+    app: currency-conversion
+  name: currency-conversion
   namespace: default
 spec:
   ports:
@@ -58,7 +58,7 @@ spec:
       protocol: TCP
       targetPort: 8100
   selector:
-    app: currency-conversion-service
+    app: currency-conversion
   sessionAffinity: None
   type: LoadBalancer
 ---
@@ -70,5 +70,5 @@ data:
   MANAGEMENT_HEALTH_RABBIT_ENABLED: false
 kind: ConfigMap
 metadata:
-  name: currency-conversion-service
+  name: currency-conversion
   namespace: default
